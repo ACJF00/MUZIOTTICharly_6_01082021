@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const path = require('path');
 
 const sauceRoutes = require('./routes/sauce')
 
@@ -22,6 +23,8 @@ mongoose.connect('mongodb+srv://Charly:muziotti@go-fullstack.74vdo.mongodb.net/m
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 app.use(bodyParser.json());
+
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use('/api/sauce', sauceRoutes)
 app.use('/api/auth', userRoutes);
